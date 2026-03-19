@@ -1,0 +1,92 @@
+[
+  {
+    "id": "depression-1",
+    "text": "Little interest or pleasure in doing things",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-2",
+    "text": "Feeling down, depressed, or hopeless",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-3",
+    "text": "Trouble falling or staying asleep, or sleeping too much",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-4",
+    "text": "Feeling tired or having little energy",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-5",
+    "text": "Poor appetite or overeating",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-6",
+    "text": "Feeling bad about yourself - or that you are a failure or have let yourself or your family down",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-7",
+    "text": "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-8",
+    "text": "Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  },
+  {
+    "id": "depression-9",
+    "text": "Thoughts that you would be better off dead, or of hurting yourself in some way",
+    "options": [
+      { "label": "Not at all", "value": 0 },
+      { "label": "Several days", "value": 1 },
+      { "label": "More than half the days", "value": 2 },
+      { "label": "Nearly every day", "value": 3 }
+    ]
+  }
+]

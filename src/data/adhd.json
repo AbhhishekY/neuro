@@ -1,0 +1,68 @@
+[
+  {
+    "id": "adhd-1",
+    "text": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 1 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  },
+  {
+    "id": "adhd-2",
+    "text": "How often do you have difficulty getting things in order when you have to do a task that requires organization?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 1 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  },
+  {
+    "id": "adhd-3",
+    "text": "How often do you have problems remembering appointments or obligations?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 1 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  },
+  {
+    "id": "adhd-4",
+    "text": "When you have a task that requires a lot of thought, how often do you avoid or delay getting started?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 0 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  },
+  {
+    "id": "adhd-5",
+    "text": "How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 0 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  },
+  {
+    "id": "adhd-6",
+    "text": "How often do you feel overly active and compelled to do things, like you were driven by a motor?",
+    "options": [
+      { "label": "Never", "value": 0 },
+      { "label": "Rarely", "value": 0 },
+      { "label": "Sometimes", "value": 0 },
+      { "label": "Often", "value": 1 },
+      { "label": "Very often", "value": 1 }
+    ]
+  }
+]

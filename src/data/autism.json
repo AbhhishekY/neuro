@@ -1,0 +1,102 @@
+[
+  {
+    "id": "autism-1",
+    "text": "I often notice small sounds when others do not",
+    "options": [
+      { "label": "Definitely agree", "value": 1 },
+      { "label": "Slightly agree", "value": 1 },
+      { "label": "Slightly disagree", "value": 0 },
+      { "label": "Definitely disagree", "value": 0 }
+    ]
+  },
+  {
+    "id": "autism-2",
+    "text": "I usually concentrate more on the whole picture, rather than the small details",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-3",
+    "text": "I find it easy to do more than one thing at once",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-4",
+    "text": "If there is an interruption, I can switch back to what I was doing very quickly",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-5",
+    "text": "I find it easy to read between the lines when someone is talking to me",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-6",
+    "text": "I know how to tell if someone listening to me is getting bored",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-7",
+    "text": "When I am reading a story I find it difficult to work out the characters' intentions",
+    "options": [
+      { "label": "Definitely agree", "value": 1 },
+      { "label": "Slightly agree", "value": 1 },
+      { "label": "Slightly disagree", "value": 0 },
+      { "label": "Definitely disagree", "value": 0 }
+    ]
+  },
+  {
+    "id": "autism-8",
+    "text": "I like to collect information about categories of things (for example, types of car, bird, train, or plant)",
+    "options": [
+      { "label": "Definitely agree", "value": 1 },
+      { "label": "Slightly agree", "value": 1 },
+      { "label": "Slightly disagree", "value": 0 },
+      { "label": "Definitely disagree", "value": 0 }
+    ]
+  },
+  {
+    "id": "autism-9",
+    "text": "I find it easy to work out what someone is thinking or feeling just by looking at their face",
+    "options": [
+      { "label": "Definitely agree", "value": 0 },
+      { "label": "Slightly agree", "value": 0 },
+      { "label": "Slightly disagree", "value": 1 },
+      { "label": "Definitely disagree", "value": 1 }
+    ]
+  },
+  {
+    "id": "autism-10",
+    "text": "I find it difficult to work out people's intentions",
+    "options": [
+      { "label": "Definitely agree", "value": 1 },
+      { "label": "Slightly agree", "value": 1 },
+      { "label": "Slightly disagree", "value": 0 },
+      { "label": "Definitely disagree", "value": 0 }
+    ]
+  }
+]
