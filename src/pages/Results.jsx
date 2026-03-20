@@ -100,21 +100,33 @@ export default function Results() {
           assessmentId={assessment.id}
         />
 
-        <div className="stack-24">
-          <div className="card" style={{ background: theme.colorLight, border: `1px solid ${theme.colorBorder}` }}>
-            <h3 style={{ fontFamily: "var(--font-heading)", color: theme.colorText, marginBottom: "16px", fontSize: "1.1rem" }}>
-              Personalized Insights
+        <div className="stack-24" style={{ width: "100%" }}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            style={{ 
+              background: `linear-gradient(135deg, ${theme.colorLight} 0%, white 100%)`, 
+              border: `2px solid ${theme.colorLight}`,
+              boxShadow: `0 16px 40px ${theme.colorLight}88`,
+              borderRadius: "32px",
+              padding: "var(--sp-8)",
+              textAlign: "center"
+            }}
+          >
+            <h3 style={{ fontFamily: "var(--font-heading)", color: theme.color, marginBottom: "20px", fontSize: "1.45rem" }}>
+              A Note Just For You 🌟
             </h3>
             {isAiLoading ? (
-              <div style={{ color: theme.colorText, opacity: 0.8, fontStyle: "italic", fontSize: "0.95rem" }}>
-                Gently reflecting on your responses...
+              <div style={{ color: "var(--color-text-3)", fontStyle: "italic", fontSize: "1.05rem" }}>
+                Writing some warm thoughts...
               </div>
             ) : (
-              <div style={{ color: "var(--color-text-1)", lineHeight: "1.7", fontSize: "0.95rem", whiteSpace: "pre-wrap" }}>
+              <div style={{ color: "var(--color-text-1)", lineHeight: "1.8", fontSize: "1.1rem", whiteSpace: "pre-wrap", fontWeight: 500 }}>
                 {aiMessage}
               </div>
             )}
-          </div>
+          </motion.div>
 
           <div className="card">
             <span

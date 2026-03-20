@@ -1013,21 +1013,23 @@ nav {
    RESULTS PAGE
    ========================================== */
 .results-layout {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: var(--sp-6);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  align-items: center;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .result-meter {
   background: var(--color-surface);
   border: none;
-  border-radius: 22px;
-  padding: var(--sp-6);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 32px;
+  padding: var(--sp-8);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
   text-align: center;
-  position: sticky;
-  top: calc(var(--nav-height) + 24px);
+  width: 100%;
+  position: static;
 }
 
 .result-score {
@@ -1321,6 +1323,7 @@ nav {
 .landing-headline-accent {
   display: block;
   margin-top: 10px;
+  padding-bottom: 0.15em;
   background: linear-gradient(135deg, #8B5CF6 0%, #FF6B6B 34%, #FF8E53 68%, #FFB347 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1329,6 +1332,7 @@ nav {
 
 [data-theme="dark"] .landing-headline-accent {
   background: linear-gradient(135deg, #FCA5A5 0%, #FDBA74 35%, #FCD34D 100%);
+  padding-bottom: 0.15em;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
