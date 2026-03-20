@@ -1,9 +1,27 @@
-export async function generateResultInsights(assessment, result, answers) {
-  const apiKey = import.meta.env.VITE_NVIDIA_API_KEY;
-  if (!apiKey) {
-    throw new Error("NVIDIA API key not found. Please ensure VITE_NVIDIA_API_KEY is set in your .env.local file.");
+async function fetchNvidiaProxy(payload) {
+  // Try local API key if available (for pure Vite dev without Vercel CLI)
+  const clientKey = import.meta.env.VITE_NVIDIA_API_KEY;
+  const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  
+  // If we're strictly local and using Vite, we hit the Vite proxy (/api/nvidia defaults to proxy in vite.config)
+  // On Vercel, we hit the Vercel serverless function /api/nvidia.js
+  // Let Vite proxy or Vercel route it automatically.
+  const headers = { "Content-Type": "application/json" };
+  if (clientKey) {
+    headers["Authorization"] = `Bearer ${clientKey}`;
   }
 
+  const response = await fetch("/api/nvidia/v1/chat/completions", {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  return response.json();
+}
+
+export async function generateResultInsights(assessment, result, answers) {
   const prompt = `You are a warm, highly empathetic mental health companion.
 Your goal is to write a VERY short, highly affirming message based on the user's screening results for the ${assessment.fullTitle}.
 
@@ -12,32 +30,20 @@ User's specific answers:
 ${assessment.questions.map(q => `- ${q.text}: ${answers[q.id]?.label ?? 'No answer'}`).join('\n')}
 
 CRITICAL INSTRUCTIONS:
-1. START the message by thanking them for being here. Tell them they are incredibly brave for taking this step to understand their mind.
-2. Be VERY CONCISE. Maximum 3-4 sentences total. Do not clutter the screen with long paragraphs.
-3. Keep the tone completely uplifting, positive, and warm (a "happy, vibrant" supportive energy).
-4. Do NOT give a medical diagnosis. You are an AI peer/companion. Focus entirely on validating their feelings and commending their courage.
-5. If the score is high/severe, gently mention that reaching out to a professional is a great next step, but keep the primary focus on warmth and pride in their self-discovery.`;
+1. START the message by thanking them. Tell them they are incredibly brave for taking this step to understand their mind.
+2. YOU MUST specifically reference 1 or 2 of their exact answers to show you are listening to their unique experience (e.g., "I noticed you mentioned feeling tired nearly every day...").
+3. Be CONCISE. strictly 3 to 4 sentences maximum.
+4. Keep the tone warm, empathetic, and validating.
+5. Do NOT give a medical diagnosis. You are an AI peer/companion. Focus entirely on validating their feelings.
+6. If the score is high/severe, gently encourage reaching out to a professional as a next step.`;
 
   try {
-    const response = await fetch("/api/nvidia/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "meta/llama-3.1-70b-instruct",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 250,
-        temperature: 0.6,
-      }),
+    const data = await fetchNvidiaProxy({
+      model: "meta/llama-3.1-70b-instruct",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 250,
+      temperature: 0.6,
     });
-
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
-
-    const data = await response.json();
     return data.choices[0].message.content.trim();
   } catch (error) {
     console.error("Failed to generate insights:", error);
@@ -46,9 +52,6 @@ CRITICAL INSTRUCTIONS:
 }
 
 export async function generateLocalResources(locationString) {
-  const apiKey = import.meta.env.VITE_NVIDIA_API_KEY;
-  if (!apiKey) return "API key missing.";
-
   const prompt = `The user is located in or near: ${locationString}.
 Please provide a short, well-structured Markdown list of PUBLIC, GOVERNMENT-RUN, or NON-PROFIT mental health helplines, crisis centers, and public hospitals available in or accessible from this region.
 
@@ -60,25 +63,12 @@ CRITICAL INSTRUCTIONS:
 5. Format the output cleanly using Markdown bullet points. Do not include any introductory fluff, just the list.`;
 
   try {
-    const response = await fetch("/api/nvidia/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "meta/llama-3.1-70b-instruct",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 300,
-        temperature: 0.2,
-      }),
+    const data = await fetchNvidiaProxy({
+      model: "meta/llama-3.1-70b-instruct",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 300,
+      temperature: 0.2,
     });
-
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
-    }
-
-    const data = await response.json();
     return data.choices[0].message.content.trim();
   } catch (error) {
     console.error("Failed to fetch local resources:", error);
@@ -87,9 +77,6 @@ CRITICAL INSTRUCTIONS:
 }
 
 export async function generateRegionalHelplines(countryOrRegion) {
-  const apiKey = import.meta.env.VITE_NVIDIA_API_KEY;
-  if (!apiKey) return null;
-
   const prompt = `You are a mental health resource directory assistant.
 The user is located in: ${countryOrRegion}.
 
@@ -98,40 +85,25 @@ Each item must have these exact fields:
 - "name": short organization name (string)
 - "phone": phone number(s) (string)  
 - "note": one short sentence describing what they offer (string)
-- "href": official website URL if known, else "#" (string)
+- "href": official website if available, otherwise just leave empty (string)
 
-CRITICAL RULES:
-1. Only include free, public, government-run, or non-profit organizations. NO private clinics or paid services.
-2. If the country/region has specific local helplines, prioritize those.
-3. If no local ones exist, use well-known international non-profits (e.g. Befrienders, WHO).
-4. Return ONLY valid JSON — no markdown fences, no extra text, just the JSON array.
-
-Example output format:
-[{"name":"Crisis Line","phone":"1800-XXX","note":"24/7 free crisis support.","href":"https://example.org"}]`;
+CRITICAL: Try to find at least one crisis line and one general counseling line. ALWAYS return perfectly formatted JSON array with NO markdown wrapping.`;
 
   try {
-    const response = await fetch("/api/nvidia/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "meta/llama-3.1-70b-instruct",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 400,
-        temperature: 0.1,
-      }),
+    const data = await fetchNvidiaProxy({
+      model: "meta/llama-3.1-70b-instruct",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 300,
+      temperature: 0.1,
     });
-
-    if (!response.ok) throw new Error(`API error: ${response.status}`);
-    const data = await response.json();
-    const raw = data.choices[0].message.content.trim();
-    // Strip any accidental markdown fences
-    const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/```$/i, "").trim();
-    return JSON.parse(cleaned);
+    let raw = data.choices[0].message.content.trim();
+    if (raw.startsWith("```json")) {
+      raw = raw.replace(/^```json/, "");
+      raw = raw.replace(/```$/, "");
+    }
+    return JSON.parse(raw);
   } catch (error) {
     console.error("Failed to fetch regional helplines:", error);
-    return null; // Graceful fallback — caller will use defaults
+    return null;
   }
 }

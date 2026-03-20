@@ -8,12 +8,14 @@ import Landing from "./pages/Landing";
 import Quiz from "./pages/Quiz";
 import Referral from "./pages/Referral";
 import Results from "./pages/Results";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   const location = useLocation();
 
   return (
     <div className="app-shell">
+      <ScrollToTop />
       <Navbar />
 
       <main>
