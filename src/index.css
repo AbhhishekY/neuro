@@ -1274,32 +1274,54 @@ nav {
   z-index: 1;
 }
 
-.landing-greeting {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 2.2vw, 1.3rem);
-  font-weight: 500;
-  color: #FF6B6B;
-  margin-bottom: var(--sp-5);
-  letter-spacing: 0.01em;
+.landing-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: var(--sp-6);
 }
 
-[data-theme="dark"] .landing-greeting {
-  color: #FCA5A5;
+.landing-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  color: var(--color-text-2);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .landing-pill {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(148, 163, 184, 0.18);
+  color: var(--color-text-2);
 }
 
 .landing-headline {
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 8.5vw, 5.2rem);
+  font-size: clamp(2.9rem, 8vw, 5.1rem);
   font-weight: 800;
-  line-height: 1.06;
+  line-height: 1;
   color: var(--color-text-1);
   margin-bottom: var(--sp-6);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.05em;
+  max-width: 10ch;
 }
 
 .landing-headline-accent {
   display: block;
-  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 35%, #FFB347 65%, #FDCB6E 100%);
+  margin-top: 10px;
+  background: linear-gradient(135deg, #8B5CF6 0%, #FF6B6B 34%, #FF8E53 68%, #FFB347 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1313,12 +1335,71 @@ nav {
 }
 
 .landing-subtitle {
-  font-size: clamp(0.9rem, 2vw, 1.05rem);
-  color: var(--color-text-3);
-  max-width: 380px;
-  line-height: 1.6;
-  margin-bottom: clamp(48px, 10vh, 96px);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  color: var(--color-text-2);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: var(--sp-8);
   font-weight: 400;
+}
+
+.landing-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-8);
+}
+
+.landing-primary-cta {
+  background: linear-gradient(135deg, #8B5CF6 0%, #FF6B6B 100%);
+  border: none;
+  box-shadow: 0 12px 28px rgba(139, 92, 246, 0.26);
+}
+
+.landing-primary-cta:hover {
+  box-shadow: 0 16px 34px rgba(139, 92, 246, 0.32);
+}
+
+.landing-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: var(--sp-4);
+  width: min(100%, 620px);
+  margin-bottom: clamp(40px, 8vh, 72px);
+}
+
+.landing-stat {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 20px;
+  padding: var(--sp-4) var(--sp-5);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="dark"] .landing-stat {
+  background: rgba(30, 41, 59, 0.62);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+.landing-stat-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text-1);
+}
+
+.landing-stat-label {
+  display: block;
+  margin-top: 8px;
+  font-size: var(--text-xs);
+  color: var(--color-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .landing-scroll-cta {
@@ -1350,11 +1431,16 @@ nav {
 }
 
 .landing-cards {
-  max-width: 520px;
+  max-width: 760px;
   margin: 0 auto;
   padding: var(--sp-6) var(--page-px) var(--sp-16);
   position: relative;
   z-index: 1;
+}
+
+.landing-cards-header {
+  text-align: center;
+  margin-bottom: var(--sp-8);
 }
 
 .landing-cards-label {
@@ -1362,8 +1448,17 @@ nav {
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-text-3);
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-3);
   letter-spacing: 0.02em;
+}
+
+.landing-cards-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--color-text-1);
+  max-width: 18ch;
+  margin: 0 auto;
 }
 
 .card-stack {
@@ -1488,6 +1583,14 @@ nav {
 
   .landing-hero {
     min-height: calc(100vh - var(--nav-height) - 80px);
+  }
+
+  .landing-headline {
+    max-width: none;
+  }
+
+  .landing-stats {
+    grid-template-columns: 1fr;
   }
 
   .stacked-card {

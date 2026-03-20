@@ -1,9 +1,21 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 import AssessmentCard from "../components/AssessmentCard";
 import { medicalDisclaimer } from "../data/assessmentMeta";
 import { getAssessmentList } from "../data";
+
+const highlights = ["Free", "Private", "Browser-only"];
+
+const stats = [
+  { value: "4", label: "validated screeners" },
+  { value: "2-4", label: "minutes each" },
+  { value: "0", label: "accounts required" },
+];
 
 export default function Landing() {
   const assessments = getAssessmentList();
@@ -22,43 +34,77 @@ export default function Landing() {
       <div className="landing-shape landing-shape--4" aria-hidden="true" />
 
       <section className="landing-hero">
-        <motion.p
-          className="landing-greeting"
+        <motion.div
+          className="landing-badge-row"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.45, delay: 0.08 }}
         >
-          hey, you.
-        </motion.p>
+          {highlights.map((item) => (
+            <span key={item} className="landing-pill">
+              {item}
+            </span>
+          ))}
+        </motion.div>
 
         <motion.h1
           className="landing-headline"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.55, delay: 0.18, ease: "easeOut" }}
         >
-          your brain is{" "}
-          <span className="landing-headline-accent">pretty amazing.</span>
+          Mental health screening,
+          <span className="landing-headline-accent">made lighter.</span>
         </motion.h1>
 
         <motion.p
           className="landing-subtitle"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
+          transition={{ duration: 0.45, delay: 0.34 }}
         >
-          free & private screening for ADHD, autism, depression & anxiety
+          NeuroBright gives you short, colorful, low-pressure check-ins for
+          ADHD, autism, depression, and anxiety with clear next steps.
         </motion.p>
+
+        <motion.div
+          className="landing-actions"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.48 }}
+        >
+          <a href="#assessments" className="btn btn--primary landing-primary-cta">
+            Start screening
+            <FontAwesomeIcon icon={faArrowRight} />
+          </a>
+          <Link to="/about" className="btn btn--ghost">
+            How it works
+          </Link>
+        </motion.div>
+
+        <motion.div
+          className="landing-stats"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.58 }}
+        >
+          {stats.map((item) => (
+            <div key={item.label} className="landing-stat">
+              <span className="landing-stat-value">{item.value}</span>
+              <span className="landing-stat-label">{item.label}</span>
+            </div>
+          ))}
+        </motion.div>
 
         <motion.a
           href="#assessments"
           className="landing-scroll-cta"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: 0.45, delay: 0.7 }}
           aria-label="Scroll to assessments"
         >
-          <span className="landing-scroll-label">peek below</span>
+          <span className="landing-scroll-label">Explore screeners</span>
           <FontAwesomeIcon
             icon={faChevronDown}
             className="landing-scroll-icon"
@@ -67,15 +113,19 @@ export default function Landing() {
       </section>
 
       <section id="assessments" className="landing-cards">
-        <motion.p
-          className="landing-cards-label"
+        <motion.div
+          className="landing-cards-header"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.45 }}
         >
-          pick what speaks to you
-        </motion.p>
+          <p className="landing-cards-label">Choose your check-in</p>
+          <h2 className="landing-cards-title">
+            Four short paths, each designed to feel clear and low-pressure.
+          </h2>
+        </motion.div>
+
         <div className="card-stack">
           {assessments.map((assessment, index) => (
             <AssessmentCard
