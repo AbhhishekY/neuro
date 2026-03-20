@@ -88,7 +88,7 @@ export default function Referral() {
           const { latitude, longitude } = position.coords;
 
           const geoRes = await fetch(
-            `/api/geocode/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en`
+            `/api/geocode?lat=${latitude}&lon=${longitude}`
           );
           if (!geoRes.ok) throw new Error("Reverse geocoding failed.");
           const geo = await geoRes.json();
