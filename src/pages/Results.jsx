@@ -135,6 +135,11 @@ export default function Results() {
     return () => { active = false; };
   }, [assessment, result, answers, aiMessage, isAiLoading]);
 
+  // Scroll to top on mount to avoid inheriting scroll position from the quiz page
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
   React.useEffect(() => {
     if (computedResult?.completed && !results[type]) saveResult(type, computedResult);
   }, [computedResult, results, saveResult, type]);
