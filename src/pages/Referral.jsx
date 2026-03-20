@@ -110,7 +110,7 @@ export default function Referral() {
               key={h.name}
               href={h.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="helpline-card"
               variants={fadeInUp}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}

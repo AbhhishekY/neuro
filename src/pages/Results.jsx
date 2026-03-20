@@ -38,6 +38,31 @@ export default function Results() {
   const result = results[type] ?? computedResult;
   const theme = getConditionTheme(assessment.id);
 
+  const [aiMessage, setAiMessage] = React.useState(null);
+  const [isAiLoading, setIsAiLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    let active = true;
+    async function fetchInsights() {
+      try {
+        setIsAiLoading(true);
+        const { generateResultInsights } = await import("../services/llmService.js");
+        const msg = await generateResultInsights(assessment, result, answers);
+        if (active) setAiMessage(msg);
+      } catch (e) {
+        console.error("LLM Error:", e);
+        if (active) setAiMessage("We encountered a small hiccup generating your personalized insights, but your standard results are below. Always remember you deserve support.");
+      } finally {
+        if (active) setIsAiLoading(false);
+      }
+    }
+
+    if (result?.completed && !aiMessage && isAiLoading) {
+      fetchInsights();
+    }
+    return () => { active = false; };
+  }, [assessment, result, answers, aiMessage, isAiLoading]);
+
   React.useEffect(() => {
     if (computedResult?.completed && !results[type]) {
       saveResult(type, computedResult);
@@ -76,6 +101,21 @@ export default function Results() {
         />
 
         <div className="stack-24">
+          <div className="card" style={{ background: theme.colorLight, border: `1px solid ${theme.colorBorder}` }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", color: theme.colorText, marginBottom: "16px", fontSize: "1.1rem" }}>
+              Personalized Insights
+            </h3>
+            {isAiLoading ? (
+              <div style={{ color: theme.colorText, opacity: 0.8, fontStyle: "italic", fontSize: "0.95rem" }}>
+                Gently reflecting on your responses...
+              </div>
+            ) : (
+              <div style={{ color: "var(--color-text-1)", lineHeight: "1.7", fontSize: "0.95rem", whiteSpace: "pre-wrap" }}>
+                {aiMessage}
+              </div>
+            )}
+          </div>
+
           <div className="card">
             <span
               className={`badge badge--${assessment.id}`}

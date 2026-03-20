@@ -53,8 +53,8 @@ export default function Landing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.18, ease: "easeOut" }}
         >
-          Mental health screening,
-          <span className="landing-headline-accent">made lighter.</span>
+          Understand your mind,
+          <span className="landing-headline-accent">gently.</span>
         </motion.h1>
 
         <motion.p
