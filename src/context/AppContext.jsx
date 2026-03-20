@@ -13,9 +13,7 @@ function getInitialTheme() {
     return savedTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
 export function AppProvider({ children }) {

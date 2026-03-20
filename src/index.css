@@ -1873,11 +1873,11 @@ nav {
 .stacked-card--depression:hover { box-shadow: 0 20px 44px rgba(99, 102, 241, 0.22), 0 6px 14px rgba(99, 102, 241, 0.1); }
 .stacked-card--anxiety:hover { box-shadow: 0 20px 44px rgba(139, 92, 246, 0.22), 0 6px 14px rgba(139, 92, 246, 0.1); }
 
-/* Dark mode: use solid surface with colored left border instead of transparent backgrounds */
-[data-theme="dark"] .stacked-card--adhd { background: var(--color-surface); border-left: 3px solid #FCD34D; }
-[data-theme="dark"] .stacked-card--autism { background: var(--color-surface); border-left: 3px solid #6EE7B7; }
-[data-theme="dark"] .stacked-card--depression { background: var(--color-surface); border-left: 3px solid #A5B4FC; }
-[data-theme="dark"] .stacked-card--anxiety { background: var(--color-surface); border-left: 3px solid #C4B5FD; }
+/* Dark mode: vibrant tinted background with matching border */
+[data-theme="dark"] .stacked-card--adhd { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
+[data-theme="dark"] .stacked-card--autism { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+[data-theme="dark"] .stacked-card--depression { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); }
+[data-theme="dark"] .stacked-card--anxiety { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); }
 
 .stacked-card__icon {
   width: 44px;
@@ -1962,6 +1962,16 @@ nav {
 @media (max-width: 640px) {
   body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
   .page-shell { padding: var(--sp-6) var(--page-px); }
+
+  /* Fix containing block bug: backdrop-filter traps position:fixed children */
+  nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface);
+  }
+  [data-theme="dark"] nav {
+    background: var(--color-bg);
+  }
 
   /* Mobile App Bottom Tab Bar Navigation */
   .nav-links {
