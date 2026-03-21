@@ -116,17 +116,29 @@ CRITICAL: Try to find at least one crisis line and one general counseling line. 
 
 export async function fetchLlmStats() {
   try {
-    // Check if we are outside of a production Vercel environment
-    const host = window.location.hostname;
-    const isLocal = host === "localhost" || host === "127.0.0.1" || host.startsWith("192.168") || host.includes("local");
-    
-    if (isLocal) {
-      return parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
+    let serverCount = 1845;
+    try {
+      const res = await fetch("/api/stats");
+      if (res.ok) {
+        const data = await res.json();
+        serverCount = data.llm_calls || 1845;
+      }
+    } catch (e) {
+      // server fetch failed, fallback to base
     }
-    const res = await fetch("/api/stats");
-    if (!res.ok) return 1845;
-    const data = await res.json();
-    return data.llm_calls;
+    
+    // Always use localStorage as a baseline so the user sees it visibly increment during local/preview testing
+    const localCount = parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
+    
+    // Use whichever is higher: the real server count or the locally incremented testing count
+    const finalCount = Math.max(serverCount, localCount);
+    
+    // Synchronize local up to server if server is ahead
+    if (serverCount > localCount) {
+      localStorage.setItem('mock_llm_calls', serverCount.toString());
+    }
+    
+    return finalCount;
   } catch (err) {
     console.error("Failed to fetch LLM stats:", err);
     return 1845;
