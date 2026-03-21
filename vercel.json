@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/nvidia/:path*",
+      "destination": "/api/nvidia.js"
+    },
+    {
+      "source": "/api/geocode",
+      "destination": "/api/geocode.js"
+    },
+    {
+      "source": "/api/stats",
+      "destination": "/api/stats.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

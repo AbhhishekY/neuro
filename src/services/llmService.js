@@ -11,13 +11,25 @@ async function fetchNvidiaProxy(payload) {
     headers["Authorization"] = `Bearer ${clientKey}`;
   }
 
-  const response = await fetch("/api/nvidia/v1/chat/completions", {
+  const url = isLocal ? "/api/nvidia/v1/chat/completions" : "/api/nvidia";
+  const finalPayload = payload;
+  if (!isLocal) finalPayload.path = "/v1/chat/completions";
+
+  const response = await fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(payload),
+    body: JSON.stringify(finalPayload),
   });
 
   if (!response.ok) throw new Error(`API error: ${response.status}`);
+  
+  if (isLocal) {
+    try {
+      const current = parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
+      localStorage.setItem('mock_llm_calls', current + 1);
+    } catch(e) {}
+  }
+
   return response.json();
 }
 
@@ -110,6 +122,10 @@ CRITICAL: Try to find at least one crisis line and one general counseling line. 
 
 export async function fetchLlmStats() {
   try {
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (isLocal) {
+      return parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
+    }
     const res = await fetch("/api/stats");
     if (!res.ok) return 1845;
     const data = await res.json();
