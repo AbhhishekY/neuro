@@ -1,3 +1,5 @@
+import { kv } from '@vercel/kv';
+
 /**
  * Vercel Serverless Function: /api/nvidia
  * Proxies NVIDIA API requests to bypass CORS in production.
@@ -30,6 +32,11 @@ export default async function handler(req, res) {
     if (!fetchResponse.ok) {
       const errorText = await fetchResponse.text();
       return res.status(fetchResponse.status).json({ error: errorText });
+    }
+
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      // Fire-and-forget increment on successful generation
+      kv.incr('llm_calls_total').catch((e) => console.error("KV Error:", e));
     }
 
     const data = await fetchResponse.json();

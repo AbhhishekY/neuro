@@ -96,14 +96,26 @@ CRITICAL: Try to find at least one crisis line and one general counseling line. 
       max_tokens: 300,
       temperature: 0.1,
     });
-    let raw = data.choices[0].message.content.trim();
-    if (raw.startsWith("```json")) {
-      raw = raw.replace(/^```json/, "");
-      raw = raw.replace(/```$/, "");
+    const raw = data.choices[0].message.content.trim();
+    const match = raw.match(/\[\s*\{[\s\S]*?\}\s*\]/);
+    if (match) {
+      return JSON.parse(match[0]);
     }
     return JSON.parse(raw);
   } catch (error) {
     console.error("Failed to fetch regional helplines:", error);
     return null;
+  }
+}
+
+export async function fetchLlmStats() {
+  try {
+    const res = await fetch("/api/stats");
+    if (!res.ok) return 1845;
+    const data = await res.json();
+    return data.llm_calls;
+  } catch (err) {
+    console.error("Failed to fetch LLM stats:", err);
+    return 1845;
   }
 }

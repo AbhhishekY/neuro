@@ -105,8 +105,10 @@ export default function Referral() {
           const cards = await generateRegionalHelplines(country || region);
           if (cards && Array.isArray(cards) && cards.length > 0) {
             setHelplines(cards);
+            setStatus("done");
+          } else {
+            throw new Error("Our AI couldn't formulate local helplines. Showing global resources.");
           }
-          setStatus("done");
         } catch (err) {
           console.error(err);
           setErrorMsg("Could not fetch local helplines: " + err.message);

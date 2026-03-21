@@ -8,17 +8,26 @@ import {
 import AssessmentCard from "../components/AssessmentCard";
 import { medicalDisclaimer } from "../data/assessmentMeta";
 import { getAssessmentList } from "../data";
+import { useState, useEffect } from "react";
+import { fetchLlmStats } from "../services/llmService";
 
 const highlights = ["Free", "Private", "Browser-only"];
 
-const stats = [
-  { value: "4", label: "validated screeners" },
-  { value: "2-4", label: "minutes each" },
-  { value: "0", label: "accounts required" },
-];
-
 export default function Landing() {
   const assessments = getAssessmentList();
+  const [llmCallsCount, setLlmCallsCount] = useState("...");
+
+  useEffect(() => {
+    fetchLlmStats().then((count) => {
+      if (count) setLlmCallsCount(count.toLocaleString());
+    });
+  }, []);
+
+  const stats = [
+    { value: "4", label: "validated screeners" },
+    { value: "2-4", label: "minutes each" },
+    { value: llmCallsCount, label: "tests taken" },
+  ];
 
   return (
     <motion.div
