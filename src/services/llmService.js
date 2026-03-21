@@ -11,24 +11,18 @@ async function fetchNvidiaProxy(payload) {
     headers["Authorization"] = `Bearer ${clientKey}`;
   }
 
-  const url = isLocal ? "/api/nvidia/v1/chat/completions" : "/api/nvidia";
-  const finalPayload = payload;
-  if (!isLocal) finalPayload.path = "/v1/chat/completions";
-
-  const response = await fetch(url, {
+  const response = await fetch("/api/nvidia/v1/chat/completions", {
     method: "POST",
     headers,
-    body: JSON.stringify(finalPayload),
+    body: JSON.stringify(payload),
   });
 
   if (!response.ok) throw new Error(`API error: ${response.status}`);
   
-  if (isLocal) {
-    try {
-      const current = parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
-      localStorage.setItem('mock_llm_calls', current + 1);
-    } catch(e) {}
-  }
+  try {
+    const current = parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
+    localStorage.setItem('mock_llm_calls', current + 1);
+  } catch(e) {}
 
   return response.json();
 }
@@ -122,7 +116,10 @@ CRITICAL: Try to find at least one crisis line and one general counseling line. 
 
 export async function fetchLlmStats() {
   try {
-    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    // Check if we are outside of a production Vercel environment
+    const host = window.location.hostname;
+    const isLocal = host === "localhost" || host === "127.0.0.1" || host.startsWith("192.168") || host.includes("local");
+    
     if (isLocal) {
       return parseInt(localStorage.getItem('mock_llm_calls') || '1845', 10);
     }
