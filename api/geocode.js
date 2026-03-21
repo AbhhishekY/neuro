@@ -17,9 +17,9 @@ export default async function handler(req, res) {
   try {
     const nominatimRes = await fetch(url, {
       headers: {
-        "User-Agent": "NeuroBright-App/1.0 (mental health screener; https://github.com/AbhhishekY/neuro)",
+        "User-Agent": "MindCompass-App/1.0 (mental health screener; https://github.com/AbhhishekY/neuro)",
         "Accept": "application/json",
-        "Referer": "https://neurobright.vercel.app/",
+        "Referer": "https://mindcompass.vercel.app/",
       },
     });
 

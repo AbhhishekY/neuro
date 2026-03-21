@@ -22,7 +22,7 @@ export default function Navbar() {
         <span className="nav-brand-icon">
           <FontAwesomeIcon icon={faBrain} />
         </span>
-        NeuroBright
+        MindCompass
       </NavLink>
 
       <div className="nav-right">

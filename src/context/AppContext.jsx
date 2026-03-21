@@ -7,7 +7,7 @@ function getInitialTheme() {
     return "light";
   }
 
-  const savedTheme = window.localStorage.getItem("neurobright-theme");
+  const savedTheme = window.localStorage.getItem("mindcompass-theme");
 
   if (savedTheme === "light" || savedTheme === "dark") {
     return savedTheme;
@@ -24,7 +24,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("neurobright-theme", theme);
+    window.localStorage.setItem("mindcompass-theme", theme);
   }, [theme]);
 
   function toggleTheme() {

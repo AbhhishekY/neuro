@@ -63,7 +63,7 @@ export default function Landing() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.45, delay: 0.34 }}
         >
-          NeuroBright gives you short, colorful, low-pressure check-ins for
+          MindCompass gives you short, colorful, low-pressure check-ins for
           ADHD, autism, depression, and anxiety with clear next steps.
         </motion.p>
 

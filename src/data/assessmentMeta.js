@@ -191,7 +191,7 @@ export const assessmentMeta = {
 };
 
 export const medicalDisclaimer =
-  "NeuroBright is a self-screening tool based on WHO-recommended questionnaires. It does not provide medical diagnoses. Please consult a licensed mental health professional for clinical evaluation.";
+  "MindCompass is a self-screening tool based on WHO-recommended questionnaires. It does not provide medical diagnoses. Please consult a licensed mental health professional for clinical evaluation.";
 
 export function rgbWithAlpha(rgb, alpha) {
   return `rgb(${rgb} / ${alpha})`;

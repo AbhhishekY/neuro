@@ -11,12 +11,12 @@ import { staggerContainer, fadeInUp } from "../animations";
 const sections = [
   {
     icon: faCircleInfo,
-    title: "What NeuroBright is",
+    title: "What MindCompass is",
     copy: "A frontend-only screening and referral experience designed to make the first step toward mental health support feel calmer, clearer, and more human.",
   },
   {
     icon: faXmark,
-    title: "What NeuroBright is not",
+    title: "What MindCompass is not",
     copy: "Not a diagnosis engine, not a substitute for a clinician, and not a data collection product. Your answers are used only in the live browser session.",
   },
   {
@@ -48,7 +48,7 @@ export default function About() {
           transition={{ delay: 0.15, duration: 0.4 }}
           style={{ marginBottom: "14px" }}
         >
-          About NeuroBright
+          About MindCompass
         </motion.p>
         <motion.h1
           className="hero-title"

@@ -30,7 +30,7 @@ function PrintSummary({ assessment, result, answers, aiMessage, theme }) {
     <div className="print-summary" id="print-summary">
       <div className="print-header">
         <div>
-          <div className="print-logo">🧠 NeuroBright</div>
+          <div className="print-logo">🧠 MindCompass</div>
           <div className="print-tagline">Self-Screening Summary</div>
         </div>
         <div className="print-date">Date: {date}</div>

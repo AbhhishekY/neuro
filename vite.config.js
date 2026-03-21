@@ -16,7 +16,7 @@ export default defineConfig({
         // Rewrite /api/geocode?lat=X&lon=Y → /reverse?format=json&lat=X&lon=Y
         rewrite: (path) => path.replace(/^\/api\/geocode/, '/reverse') + '&format=json&accept-language=en',
         headers: {
-          'User-Agent': 'NeuroBright-App/1.0 (mental health screener; contact@neurobright.app)'
+          'User-Agent': 'MindCompass-App/1.0 (mental health screener; contact@mindcompass.app)'
         }
       }
     }
